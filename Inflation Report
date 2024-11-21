@@ -1,0 +1,110 @@
+import requests
+import json
+
+# Function to get the CPI data from the BLS API
+def get_inflation_data(quarter, year):
+    # Series ID for the CPI (Consumer Price Index)
+    series_id = 'CUUR0000SA0'  
+    
+    # Determine start and end months based on the quarter and year input
+    if quarter == 1:
+        months = ['M1', 'M2', 'M3']
+    elif quarter == 2:
+        months = ['M4', 'M5', 'M6']
+    elif quarter == 3:
+        months = ['M7', 'M8', 'M9']
+    elif quarter == 4:
+        months = ['M10', 'M11', 'M12']
+    else:
+        raise ValueError("Invalid quarter. Please enter a value between 1 and 4.")
+
+    # Prepare the data for the API request
+    data = json.dumps({
+        "seriesid": [series_id],
+        "startyear": str(year),
+        "endyear": str(year),
+        "period": ','.join(months)
+    })
+    
+    # Make the request to the BLS API
+    headers = {'Content-type': 'application/json'}
+    response = requests.post('https://api.bls.gov/publicAPI/v2/timeseries/data/', data=data, headers=headers)
+    
+    # Check for successful response
+    if response.status_code == 200:
+        json_data = response.json()
+        
+        # Check if data exists in the response
+        if 'Results' in json_data and 'series' in json_data['Results']:
+            cpi_values = []
+            for series in json_data['Results']['series']:
+                for item in series['data']:
+                    try:
+                        cpi_values.append(float(item['value']))  # Append CPI values (not inflation rates)
+                    except KeyError:
+                        continue
+            return cpi_values
+        else:
+            raise Exception("No data found for the selected quarter and year.")
+    else:
+        raise Exception(f"Failed to fetch data from the BLS API: {response.status_code}")
+
+# Function to calculate monthly inflation from CPI values
+def calculate_monthly_inflation(cpi_values):
+    inflation_rates = []
+    
+    # Reverse the CPI values if they are in reverse order
+    cpi_values_reversed = cpi_values[::-1]
+    
+    # Calculate inflation rates for consecutive months
+    for i in range(1, len(cpi_values_reversed)):
+        inflation_rate = ((cpi_values_reversed[i] - cpi_values_reversed[i-1]) / cpi_values_reversed[i-1]) * 100
+        inflation_rates.append(inflation_rate)
+    
+    return inflation_rates
+
+# Function to calculate monthly inflation from CPI values
+def calculate_monthly_inflation(cpi_values):
+    inflation_rates = []
+    
+    # Reverse the CPI values if they are in reverse order
+    cpi_values_reversed = cpi_values[::-1]
+    
+    # Calculate inflation rates for consecutive months
+    for i in range(1, len(cpi_values_reversed)):
+        inflation_rate = ((cpi_values_reversed[i] - cpi_values_reversed[i-1]) / cpi_values_reversed[i-1]) * 100
+        inflation_rates.append(inflation_rate)
+    
+    return inflation_rates
+
+# Function to calculate average inflation
+def calculate_average_inflation(inflation_rates):
+    if len(inflation_rates) == 0:
+        return 0
+    average_inflation = sum(inflation_rates) / len(inflation_rates)
+    return average_inflation
+
+# Main function to input the quarter, year, and get the results
+def get_inflation_for_quarter_and_year():
+    # Input quarter and year
+    quarter = int(input("Enter the quarter (1-4): "))
+    year = int(input("Enter the year (e.g., 2023): "))
+    
+    # Fetched the CPI values for the specified quarter
+    cpi_values = get_inflation_data(quarter, year)
+    
+    # Checked if we successfully got CPI data
+    if cpi_values:
+        # Calculate monthly inflation rates
+        inflation_rates = calculate_monthly_inflation(cpi_values)
+        print(f"Inflation Rates for the months: {inflation_rates}")
+        
+        # Calculate the quarterly inflation average
+        quarterly_inflation = calculate_average_inflation(inflation_rates)
+        print(f"Average Quarterly Inflation: {quarterly_inflation:.2f}%")
+    else:
+        print("Could not retrieve inflation data.")
+
+# Run the function
+get_inflation_for_quarter_and_year()
+
