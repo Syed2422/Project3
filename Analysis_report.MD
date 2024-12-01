@@ -1,5 +1,12 @@
 ### Model Performance Comparison
 
+For regression problems, the goal is to predict continuous numerical values, so other metrics are better suited to evaluate performance.
+
+Here’s why we used Mean Absolute Error (MAE), Mean Squared Error (MSE), and R-squared (R²) instead of accuracy:
+
+
+
+
 | **Metric**                    | **Random Forest** | **XGBoost**  |
 |-------------------------------|-------------------|--------------|
 | **Mean Squared Error (MSE)**   | 0.3360            | 0.4791       |
