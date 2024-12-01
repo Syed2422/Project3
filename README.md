@@ -16,6 +16,6 @@ The aim of this project is to predict stock price performance by analyzing the s
 This pipeline provides a robust framework for analyzing earnings call sentiments and linking them to stock performance, empowering investors with actionable insights.
 
 APIs:
-https://api-ninjas.com/api/earningscalltranscript
-https://www.alphavantage.co/query
-https://api.openai.com/v1/chat/completions
+- https://api-ninjas.com/api/earningscalltranscript
+- https://www.alphavantage.co/query
+- https://api.openai.com/v1/chat/completions
