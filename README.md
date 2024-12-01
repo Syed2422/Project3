@@ -1,10 +1,10 @@
 # Project3
 
 
-##Goal
+## Goal
 The aim of this project is to predict stock price performance by analyzing the sentiment of public earnings call transcripts. Using advanced generative AI and Natural Language Processing (NLP) techniques, we identified correlations between sentiment, EPS growth, and price movements. By integrating sentiment insights with financial metrics, this project delivers sentiment-driven investment recommendations to aid informed decision-making.
 
-##Solution
+## Solution
 1. Data Sources:
 - Utilized API Ninjas and Alpha Vantage to gather earnings call data, financial metrics, and historical stock prices.
 - Integrated OpenAI’s capabilities to perform sentiment analysis on earnings call transcripts.
