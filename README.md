@@ -43,28 +43,35 @@ We conducted financial analysis to derive the following key insights:
 - **Feature Engineering**: Created features like EPS surprise (difference between reported and estimated EPS), sentiment (positive, neutral, negative), and stock growth (7-day growth, 14-day growth, etc.).
 - **Sentiment Analysis**: Sentiment of the earnings call transcripts is analyzed using OpenAI's GPT-3.5 Turbo model. The transcripts are processed through the model to classify the sentiment as either positive, negative, or neutral.
 
-### 4. Model Selection
+### 4. Correlation Between Sentiment and Market Volatility
+- **Sentiment Analysis and Market Volatility**: We explored the correlation between sentiment (derived from earnings call transcripts using **OpenAI GPT-3.5 Turbo**) and market volatility (measured by stock price fluctuations). 
+  - A **positive sentiment** often correlates with **lower volatility**, as positive news tends to stabilize stock prices.
+  - A **negative sentiment** is generally associated with **higher volatility**, as bad news or uncertainty can increase market fluctuations.
+  - The analysis showed that **strong positive sentiment** tends to lead to more stable stock price movements, while **negative sentiment** can cause sharper fluctuations and higher volatility in the market.
+  
+
+### 5. Model Selection
 We evaluated two machine learning models for predicting stock price growth:
 - **Random Forest**: A powerful ensemble method that uses multiple decision trees to make predictions. It is less prone to overfitting and handles nonlinear data well.
 - **XGBoost**: A gradient boosting framework known for high performance and accuracy in machine learning competitions. It works well on structured/tabular data with a large number of features.
 
-### 5. Model Fine-Tuning
+### 6. Model Fine-Tuning
 - **Hyperparameter Tuning**: We performed hyperparameter tuning using RandomizedSearchCV to find the best configuration for both models. This step helped optimize parameters like the number of estimators, maximum depth, learning rate, and others.
 - **Cross-Validation**: We used 5-fold cross-validation to evaluate the models and ensure they generalize well on unseen data.
 
-### 6. Model Evaluation
+### 7. Model Evaluation
 - **Random Forest**: The Random Forest model performed well with a low Mean Squared Error (MSE) of approximately 0.08, a Mean Absolute Error (MAE) of 0.24, and an R-squared score of 0.79.
 - **XGBoost**: The XGBoost model showed good performance with an MSE of approximately 0.15, an MAE of 0.29, and an R-squared score of 0.72.
 
 We decided to choose **Random Forest** for the final model due to its better generalization and robustness on the dataset.
 
-### 7. Model Testing
+### 8. Model Testing
 After training, we tested the model on a separate dataset (20% of the total data) to ensure it performed well on unseen data. The Random Forest model had better performance in terms of accuracy, which is why we selected it for the final deployment.
 
 ### 8. Model Deployment
 We deployed the model using Gradio, a Python library that allows for the creation of easy-to-use web interfaces for machine learning models. Users can input a stock ticker, year, and quarter, and the system will predict the 7-day stock growth based on earnings data, sentiment analysis, and stock price data.
 
-### 9. Output
+### 10. Output
 The output from the model includes:
 - **Sentiment Analysis**: The sentiment of the earnings call transcript (positive, negative, or neutral).
 - **Stock Price Growth**: The predicted 7-day stock growth based on the model's analysis.
@@ -72,10 +79,10 @@ The output from the model includes:
 - **Recommendation**: The recommendation to buy, sell, or hold based on the sentiment and earnings data.
 - **Charts**: Charts showing the growth over 7 days and EPS comparison (reported vs. estimated).
 
-### 10. OpenAI GPT-3.5 Turbo Integration
+### 11. OpenAI GPT-3.5 Turbo Integration
 We used **OpenAI GPT-3.5 Turbo** for sentiment analysis of earnings call transcripts. The transcripts are passed through the model, and the sentiment is classified as positive, neutral, or negative. This sentiment score is then used as an important feature in the stock growth prediction model.
 
-### 11. Gradio Interface
+### 12. Gradio Interface
 The Gradio interface allows users to input a stock ticker, year, and quarter to get the stock sentiment analysis recommendation to buy, sell, or hold.
 
 ## Requirements
