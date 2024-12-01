@@ -38,3 +38,21 @@ Explanation: R² represents the proportion of the variance in the dependent vari
 
 Importance in Stock Market: R² tells us how well the model can explain market behavior based on the features (earnings, sentiment, etc.). In the stock market, a higher R² means the model can better capture the underlying factors that drive stock price movements.
 Interpretation: The Random Forest model has a higher R² (0.9793), meaning it explains a larger proportion of the variance in stock price growth compared to XGBoost (0.9705). A higher R² indicates that Random Forest captures more of the market dynamics, leading to better predictions.
+
+
+Sentiment Effect on Market Volatility
+
+Sentiment analysis can significantly impact stock price prediction because it helps quantify the market's emotional reaction to news or earnings calls. Positive sentiment often leads to stock price increases, while negative sentiment can lead to price declines.
+
+Market volatility refers to the fluctuations in stock prices. If sentiment is highly volatile or swings significantly, it can increase market volatility and lead to greater fluctuations in stock prices. Incorporating sentiment analysis helps capture some of this volatility and allows the model to predict price movements more accurately.
+
+In your case, incorporating sentiment into the model (through OpenAI’s sentiment analysis of earnings transcripts) can offer an additional predictive layer, helping your model adjust for market reactions that might not be immediately reflected in historical stock data.
+
+In summary, MAE, MSE, and R² provide the right tools for evaluating regression models, especially in financial forecasting, where continuous prediction and penalty for large errors are crucial. By adding sentiment analysis into the mix, we refine the model's understanding of market dynamics, including potential volatility, which helps make more accurate predictions for stock price growth.
+
+
+
+
+
+
+
