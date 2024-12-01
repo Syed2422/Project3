@@ -2,7 +2,7 @@
 
 For regression problems, the goal is to predict continuous numerical values, so other metrics are better suited to evaluate performance.
 
-Here’s why we used Mean Absolute Error (MAE), Mean Squared Error (MSE), and R-squared (R²) instead of accuracy:
+Here’s why we used Mean Absolute Error (MAE), Mean Squared Error (MSE), and R-squared (R²).
 
 
 
